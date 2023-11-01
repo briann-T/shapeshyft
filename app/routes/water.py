@@ -25,7 +25,7 @@ async def create_water(data: Create_wEntry, current_user: UserAccount = Security
 
 @router.get("/getWater", response_model=wEntryResponse, responses=responses)
 async def get_water(current_user: UserAccount = Security(get_current_user)):
-    waterLog = await WaterEntries.get(email=current_user.email)
+    waterLog = await WaterEntries.all().filter(email=current_user.email)
     return waterLog 
 
 @router.put("/updateWater", response_model=wEntryResponse, responses=responses)
